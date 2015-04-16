@@ -16,15 +16,15 @@ import javax.ws.rs.core.Response;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import model.book;
-import command.CreateSongCommand;
-import command.DeleteSongCommand;
+import command.CreateBooksCommand;
+import command.DeleteBooksCommand;
 import command.GetbookCommand;
-import command.ListSongsCommand;
-import command.SearchSongCommand;
-import command.UpdateSongCommand;
+import command.ListBooksCommand;
+import command.SearchBooksCommand;
+import command.UpdateBooksCommand;
 import util.Constants;
 
-@Path("song")
+@Path("book")
 public class Services {
 	ObjectMapper mapper = new ObjectMapper();
 
@@ -33,7 +33,7 @@ public class Services {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response browseSongs(@QueryParam("offset") int offset,
 			@QueryParam("count") int count) {
-		ListSongsCommand command = new ListSongsCommand();
+		ListBooksCommand command = new ListBooksCommand();
 		ArrayList<book> list = command.execute();
 		for(book i : list){
 			System.out.println(i.getAuthor());System.out.println(i.getTitle());
@@ -65,18 +65,18 @@ public class Services {
 			e.printStackTrace();
 		}
 		return Response.status(200).entity(songString).build();
-	}
+	}*/
 
 	// Add a song
 	@POST
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response createSongs(String payload) {
-		CreateSongCommand create = new CreateSongCommand();
+		CreateBooksCommand create = new CreateBooksCommand();
 		book s = null;
 		String i = "";
 		try {
-			s = mapper.readValue(payload, Song.class);
+			s = mapper.readValue(payload, book.class);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			Response.status(400).entity("could not read string").build();
@@ -89,6 +89,8 @@ public class Services {
 		}
 		return Response.status(200).entity(i).build();
 	}
+	
+	/*
 	// Update a song
 	@POST
 	@Path("{id}")

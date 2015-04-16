@@ -6,22 +6,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import model.Song;
+import model.book;
 import connectionprovider.ConnectionProvider;
 
-public class SearchSongCommand {
+public class SearchBooksCommand {
 
-	public Song execute(String title) {
-		Song s = new Song();
+	public book execute(String title) {
+		book s = new book();
 		try {
 			Connection connection = ConnectionProvider.getConnection();
 			// Statement stmt = connection.createStatement();
 			PreparedStatement stmt = connection
-					.prepareStatement("SELECT * FROM Songs WHERE title = ?");
+					.prepareStatement("SELECT * FROM books WHERE title = ?");
 			stmt.setString(1, title);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				s.setArtist(rs.getString("artist"));
+				s.setAuthor(rs.getString("author"));
 				s.setTitle(rs.getString("title"));
 				s.setId(rs.getInt("id"));
 			}

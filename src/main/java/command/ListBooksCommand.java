@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import model.book;
 import connectionprovider.ConnectionProvider;
 
-public class ListSongsCommand {
+public class ListBooksCommand {
 
 	public ArrayList<book> execute() {
 		ArrayList<book> ret = new ArrayList<book>();
@@ -33,7 +33,7 @@ public class ListSongsCommand {
 		return ret;
 	}
 	public static void main(String[] args) {
-		ListSongsCommand demo = new ListSongsCommand();
+		ListBooksCommand demo = new ListBooksCommand();
 		ArrayList<book>  b = demo.execute();
 		for(book i : b){
 			System.out.println(i.getAuthor());System.out.println(i.getTitle());

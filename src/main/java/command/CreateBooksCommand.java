@@ -10,7 +10,7 @@ import java.sql.Statement;
 import model.book;
 import connectionprovider.ConnectionProvider;
 
-public class CreateSongCommand {
+public class CreateBooksCommand {
 
 	public String execute(book s) {
 
@@ -34,7 +34,7 @@ public class CreateSongCommand {
 	}
 	
 	public static void main(String[] args) {
-		CreateSongCommand demo = new CreateSongCommand();
+		CreateBooksCommand demo = new CreateBooksCommand();
 		book aa = new book();
 		
 			aa.setTitle("firstbook");

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-latest.min.js">
+</script>
+<script>
+
+$(document).ready(function(){
+    
+   $.fn.serializeObject = function()
+    {
+       var o = {};
+       var a = this.serializeArray();
+       $.each(a, function() {
+           if (o[this.name]) {
+               if (!o[this.name].push) {
+                   o[this.name] = [o[this.name]];
+               }
+               o[this.name].push(this.value || '');
+           } else {
+               o[this.name] = this.value || '';
+           }
+       });
+       return o;
+    };
+    $('#story_form').submit(function(){
+    
+    	console.log($('#story_form').serializeObject());
+    	postData($('#story_form').serializeObject());
+    	//console.log('{story:"'+document.getElementById('story_form1').value+'"}');
+    	//postData($('textarea#msg').val());
+    	return false;
+    });
+    function postData(data){
+        $.ajax({
+                type: "POST",
+                url: "/rest/book",
+                data: JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                crossDomain: true,
+                dataType: "json",
+                success: function (data, status, jqXHR) {
+                    alert("Your storyline has been added!");
+                },
+                error: function (jqXHR, status) {
+                    console.log(jqXHR);
+                    alert('failed, please check console for errors');
+                }
+             });
+       }
+});
+</script>
+</head>
+<body>
+	<h1 style="text-align: center;">Start a tweetstory</h1>
+	<form id="story_form" method="POST">
+		<br>StoryTitle:<br>
+		<textarea  maxlength="100" name="title"></textarea>
+		<br>First Storyline tweet:<br>
+		<textarea  maxlength="100" name="author"></textarea>
+		<input type="Submit">
+	</form>
+	<br>
+</body>
+</html>

@@ -5,21 +5,21 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import model.Song;
+import model.book;
 import connectionprovider.ConnectionProvider;
 
-public class UpdateSongCommand {
+public class DeleteBooksCommand {
 
-	public String execute(Song s) {
+	public String execute(book s) {
 
 		try {
 			Connection connection = ConnectionProvider.getConnection();
 			PreparedStatement stmt = connection
-					.prepareStatement("UPDATE SONGS SET title=?, artist=? WHERE id=?");
+					.prepareStatement("DELETE FROM BOOK WHERE title=?, author=? WHERE id=?");
 			stmt.setString(1, s.getTitle());
-			stmt.setString(2, s.getArtist());
+			stmt.setString(2, s.getAuthor());
 			stmt.setInt(3, s.getId());
-			stmt.executeUpdate();
+			stmt.executeQuery();
 
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
