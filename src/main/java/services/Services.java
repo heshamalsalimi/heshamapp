@@ -17,11 +17,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import model.book;
 import command.CreateBooksCommand;
-import command.DeleteBooksCommand;
+
 import command.GetbookCommand;
 import command.ListBooksCommand;
-import command.SearchBooksCommand;
-import command.UpdateBooksCommand;
+
 import util.Constants;
 
 @Path("book")
@@ -51,7 +50,7 @@ public class Services {
 		}
 		return Response.status(200).entity(songString).build();
 	}
-/*
+
 	// get song by Id
 	@GET
 	@Path("{id}")
@@ -65,7 +64,7 @@ public class Services {
 			e.printStackTrace();
 		}
 		return Response.status(200).entity(songString).build();
-	}*/
+	}
 
 	// Add a song
 	@POST
@@ -90,70 +89,5 @@ public class Services {
 		return Response.status(200).entity(i).build();
 	}
 	
-	/*
-	// Update a song
-	@POST
-	@Path("{id}")
-	@Produces({ MediaType.APPLICATION_JSON })
-	@Consumes({ MediaType.APPLICATION_JSON })
-	public Response updateSongs(String payload, @PathParam("id") int id) {
-		UpdateSongCommand update = new UpdateSongCommand();
-		Song s = null;
-		try {
-			s = mapper.readValue(payload, Song.class);
-			s.setId(id);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			Response.status(400).entity("could not read string").build();
-		}
-		try {
-			update.execute(s);
-		} catch (Exception e) {
-			e.printStackTrace();
-			Response.status(500).build();
-		}
-		return Response.status(200).build();
-	}
-	// Delete a song
 	
-	@POST
-	@Path("{id}")
-	@Produces({ MediaType.APPLICATION_JSON })
-	@Consumes({ MediaType.APPLICATION_JSON })
-	public Response deleteSongs(String payload, @PathParam("id") int id) {
-		DeleteSongCommand delete = new DeleteSongCommand();
-		Song s = null;
-		try {
-			s = mapper.readValue(payload, Song.class);
-			s.setId(id);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			Response.status(400).entity("could not read string").build();
-		}
-		try {
-			delete.execute(s);
-		} catch (Exception e) {
-			e.printStackTrace();
-			Response.status(500).build();
-		}
-		return Response.status(200).build();
-	}
-
-	// Search songs
-
-	@GET
-	@Path("{title}")
-	@Produces({ MediaType.APPLICATION_JSON })
-	public Response getSong(@PathParam("title") String title) {
-		SearchSongCommand command = new SearchSongCommand();
-		String songString = null;
-		try {
-			songString = mapper.writeValueAsString(command.execute(title));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return Response.status(200).entity(songString).build();
-	}
-	
-	*/
 }
