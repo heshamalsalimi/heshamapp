@@ -5,20 +5,21 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
-import model.Song;
+import model.book;
 import connectionprovider.ConnectionProvider;
 
 public class CreateSongCommand {
 
-	public String execute(Song s) {
+	public String execute(book s) {
 
 		try {
 			Connection connection = ConnectionProvider.getConnection();
 			PreparedStatement stmt = connection
-					.prepareStatement("INSERT INTO SONGS(title, artist) VALUES(?, ?) Returning id");
+					.prepareStatement("INSERT INTO books(title, author) VALUES(?, ?) Returning id");
 			stmt.setString(1, s.getTitle());
-			stmt.setString(2, s.getArtist());
+			stmt.setString(2, s.getAuthor());
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				return rs.getString("id");
@@ -30,6 +31,16 @@ public class CreateSongCommand {
 			e.printStackTrace();
 		}
 		return "-1";
+	}
+	
+	public static void main(String[] args) {
+		CreateSongCommand demo = new CreateSongCommand();
+		book aa = new book();
+		
+			aa.setTitle("firstbook");
+			aa.setAuthor("firstauthor");
+		//demo.execute(aa);
+		System.out.println(demo.execute(aa));
 	}
 
 }

@@ -34,11 +34,9 @@ public class ConnectionProvider {
 		try {
 			Connection connection = getConnection();
 			Statement stmt = connection.createStatement();
-			stmt.executeUpdate("INSERT INTO GOODS(THING) VALUES('My cool Item');");
-			ResultSet rs = stmt.executeQuery("SELECT Thing FROM Goods");
-			while (rs.next()) {
-				System.out.println("Thing: " + rs.getString("thing"));
-			}
+			stmt.execute("CREATE TABLE books(id   serial PRIMARY KEY,title text NOT NULL, author text NOT NULL);");
+		
+			
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

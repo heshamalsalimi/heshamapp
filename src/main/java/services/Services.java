@@ -15,10 +15,10 @@ import javax.ws.rs.core.Response;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import model.Song;
+import model.book;
 import command.CreateSongCommand;
 import command.DeleteSongCommand;
-import command.GetSongCommand;
+import command.GetbookCommand;
 import command.ListSongsCommand;
 import command.SearchSongCommand;
 import command.UpdateSongCommand;
@@ -34,7 +34,11 @@ public class Services {
 	public Response browseSongs(@QueryParam("offset") int offset,
 			@QueryParam("count") int count) {
 		ListSongsCommand command = new ListSongsCommand();
-		ArrayList<Song> list = command.execute();
+		ArrayList<book> list = command.execute();
+		for(book i : list){
+			System.out.println(i.getAuthor());System.out.println(i.getTitle());
+			
+		}
 		HashMap<String, Object> hm = new HashMap<String, Object>();
 		hm.put(Constants.Pagination.DATA, list);
 		hm.put(Constants.Pagination.OFFSET, offset);
@@ -47,13 +51,13 @@ public class Services {
 		}
 		return Response.status(200).entity(songString).build();
 	}
-
+/*
 	// get song by Id
 	@GET
 	@Path("{id}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response getSong(@PathParam("id") int id) {
-		GetSongCommand command = new GetSongCommand();
+		GetbookCommand command = new GetbookCommand();
 		String songString = null;
 		try {
 			songString = mapper.writeValueAsString(command.execute(id));
@@ -69,7 +73,7 @@ public class Services {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response createSongs(String payload) {
 		CreateSongCommand create = new CreateSongCommand();
-		Song s = null;
+		book s = null;
 		String i = "";
 		try {
 			s = mapper.readValue(payload, Song.class);
@@ -148,4 +152,6 @@ public class Services {
 		}
 		return Response.status(200).entity(songString).build();
 	}
+	
+	*/
 }
