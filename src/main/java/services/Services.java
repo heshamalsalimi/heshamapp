@@ -27,10 +27,10 @@ import util.Constants;
 public class Services {
 	ObjectMapper mapper = new ObjectMapper();
 
-	// Browse all songs
+	// Browse all books
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Response browseSongs(@QueryParam("offset") int offset,
+	public Response browbooks(@QueryParam("offset") int offset,
 			@QueryParam("count") int count) {
 		ListBooksCommand command = new ListBooksCommand();
 		ArrayList<book> list = command.execute();
@@ -42,31 +42,31 @@ public class Services {
 		hm.put(Constants.Pagination.DATA, list);
 		hm.put(Constants.Pagination.OFFSET, offset);
 		hm.put(Constants.Pagination.COUNT, count);
-		String songString = null;
+		String booksString = null;
 		try {
-			songString = mapper.writeValueAsString(hm);
+			booksString = mapper.writeValueAsString(hm);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return Response.status(200).entity(songString).build();
+		return Response.status(200).entity(booksString).build();
 	}
 
-	// get song by Id
+	// get books by Id
 	@GET
 	@Path("{id}")
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Response getSong(@PathParam("id") int id) {
+	public Response getBooks(@PathParam("id") int id) {
 		GetbookCommand command = new GetbookCommand();
-		String songString = null;
+		String booksString = null;
 		try {
-			songString = mapper.writeValueAsString(command.execute(id));
+			booksString = mapper.writeValueAsString(command.execute(id));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return Response.status(200).entity(songString).build();
+		return Response.status(200).entity(booksString).build();
 	}
 
-	// Add a song
+	// Add a book
 	@POST
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Consumes({ MediaType.APPLICATION_JSON })

@@ -39,7 +39,7 @@ $(document).ready(function(){
                 crossDomain: true,
                 dataType: "json",
                 success: function (data, status, jqXHR) {
-                    alert("Your storyline has been added!");
+                    alert("Your book has been added!");
                 },
                 error: function (jqXHR, status) {
                     console.log(jqXHR);
@@ -51,11 +51,11 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-	<h1 style="text-align: center;">Start a tweetstory</h1>
+	<h1 style="text-align: center;">Add a Book</h1>
 	<form id="story_form" method="POST">
-		<br>StoryTitle:<br>
+		<br>Book Title:<br>
 		<textarea  maxlength="100" name="title"></textarea>
-		<br>First Storyline tweet:<br>
+		<br>Book Author:<br>
 		<textarea  maxlength="100" name="author"></textarea>
 		<input type="Submit">
 	</form>
